@@ -119,7 +119,12 @@ def main():
         print("Pages 已存在：%s" % pages.get("html_url", ""))
 
     for _ in range(20):
-        pages = gh_api("GET", "pages", allow_404=True)
+        try:
+            pages = gh_api("GET", "pages", allow_404=True)
+        except SystemExit:
+            print("暂时无法查询 Pages 状态，稍后重试…")
+            time.sleep(8)
+            continue
         if pages and pages.get("status") == "built":
             print("Pages 构建完成：%s" % pages.get("html_url"))
             return 0
