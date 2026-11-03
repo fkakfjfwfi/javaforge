@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.venv/
+.trae-html-share-packages/
+.screenshots/
+
+# 项目运行时产物
+*.db
+checkpoint.json
+check_resume.json
+index.json
+check_index.json
+roundtrip.json
+demo_tasks.json
+test_checkpoint.json
+test_index.json
+reports/

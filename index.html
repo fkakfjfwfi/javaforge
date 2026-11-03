@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaForge · Java 从基础到进阶训练场</title>
+<meta name="description" content="面向学过 Java 但忘得差不多的学习者：14 节精讲、56 道可直接编译运行的练习、5 个简历级项目，覆盖基础重塑、面向对象、进阶特性与工程实战。">
+<meta name="theme-color" content="#f5f0e5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2314171c'/%3E%3Cpath d='M26 38h44v20a22 22 0 0 1-44 0z' fill='%23e08a2e'/%3E%3Cpath d='M70 42h6a10 10 0 0 1 0 20h-6' fill='none' stroke='%23e08a2e' stroke-width='6'/%3E%3Cpath d='M38 24c-4 4 4 6 0 10M50 22c-4 4 4 6 0 10M62 24c-4 4 4 6 0 10' fill='none' stroke='%23f5f0e6' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="file-warning" class="file-warning" hidden>
+  当前以 <code>file://</code> 打开，练习无法调用本机 JDK。请在项目目录运行 <code>python serve.py</code>，再访问 <code>http://127.0.0.1:8000</code>。
+</div>
+<div id="hosted-notice" class="file-warning" hidden>
+  当前是 GitHub Pages 在线阅读版：课程、速查表、书单可正常浏览，编码练习需要本机 JDK。克隆仓库后运行 <code>python serve.py</code> 即可判题。
+  <a href="https://github.com/fkakfjfwfi/javaforge#本地运行" target="_blank" rel="noopener">本地运行说明 ↗</a>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#/" aria-label="JavaForge 首页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 100 100" width="26" height="26"><rect width="100" height="100" rx="22" fill="#14171c"/><path d="M26 38h44v20a22 22 0 0 1-44 0z" fill="#e08a2e"/><path d="M70 42h6a10 10 0 0 1 0 20h-6" fill="none" stroke="#e08a2e" stroke-width="6"/><path d="M38 24c-4 4 4 6 0 10M50 22c-4 4 4 6 0 10M62 24c-4 4 4 6 0 10" fill="none" stroke="#f5f0e6" stroke-width="4" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand-text">JavaForge<em>训练场</em></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#/" data-nav="home">学习路径</a>
+      <a href="#/projects" data-nav="projects">项目工坊</a>
+      <a href="#/playground" data-nav="playground">自由练习场</a>
+      <a href="#/cheatsheet" data-nav="cheatsheet">速查表</a>
+      <a href="#/books" data-nav="books">书单</a>
+      <a href="#/progress" data-nav="progress">我的进度</a>
+    </nav>
+    <div class="header-status">
+      <span class="status-dot" id="runtime-dot" title="本机 JDK 状态"></span>
+      <span class="status-text" id="runtime-text">JDK 待命</span>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="展开导航">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="app" class="app"></main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <strong>JavaForge</strong>
+      <p>讲解 45% · 练习 55% 的 Java 训练场。练习由本机 JDK 编译执行，代码不上传。</p>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <span class="footer-head">学习</span>
+        <a href="#/">学习路径</a>
+        <a href="#/playground">自由练习场</a>
+        <a href="#/cheatsheet">速查表</a>
+      </div>
+      <div>
+        <span class="footer-head">参考</span>
+        <a href="https://docs.oracle.com/javase/tutorial/" target="_blank" rel="noopener">Java 官方教程</a>
+        <a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">JavaGuide</a>
+        <a href="https://www.ituring.com.cn/" target="_blank" rel="noopener">图灵社区</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-note">用本机 javac / java 练习 · 本地进度仅保存在你的浏览器</div>
+</footer>
+
+<div class="toast-stack" id="toast-stack" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/clike/clike.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/edit/closebrackets.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/selection/active-line.js"></script>
+<script src="assets/js/data/module-foundations.js"></script>
+<script src="assets/js/data/module-intermediate.js"></script>
+<script src="assets/js/data/module-advanced.js"></script>
+<script src="assets/js/data/module-projects.js"></script>
+<script src="assets/js/data/project-taskcli.js"></script>
+<script src="assets/js/data/project-loglab.js"></script>
+<script src="assets/js/data/project-search.js"></script>
+<script src="assets/js/data/project-cache.js"></script>
+<script src="assets/js/data/project-bank.js"></script>
+<script src="assets/js/data/books.js"></script>
+<script src="assets/js/data/cheatsheet.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
