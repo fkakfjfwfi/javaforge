@@ -170,6 +170,20 @@ python tools/check-sections.py                 # 正文示例与项目参考实�
 - 编译 30 秒 / 运行 12 秒超时，死循环会被终止。
 - 进度只保存在当前浏览器，换设备不同步。
 
+## 部署（GitHub Pages）
+
+仓库：https://github.com/fkakfjfwfi/javaforge
+在线：https://fkakfjfwfi.github.io/javaforge/
+
+如果本机 `git push` 被网络阻断，用仓库内置的 API 发布脚本：
+
+```bash
+gh auth status                       # 确认已登录且有 repo 权限
+python tools/deploy_github.py "feat: 更新课程内容"
+```
+
+脚本会把当前工作区打包成一个 tree，通过 GitHub API 创建提交并更新 `main`，然后等待 Pages 构建完成；首次发布时还会自动开启 Pages（main / root）。如果网络可以正常 `git push`，直接推送也会触发 Pages 重新发布。
+
 ## 内容参考
 
 - [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/)
